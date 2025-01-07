@@ -1,0 +1,98 @@
+﻿@model AddTaskViewModel
+
+<h2 style="margin-left: 32px;">Update Task</h2>
+<div class="containerOne my-5">
+    <div class="task-form-container">
+        <form asp-action="UpdateTask" method="post" class="task-form">
+            <h2 class="form-title">Project Details</h2>
+            <div class="row">
+                <div class="col-12 col-md-4">
+                    <div class="form-group">
+                        <label for="TaskName">Task Name</label>
+                        <input type="hidden" asp-for="TaskId" />
+                        <input type="hidden" asp-for="ProjectId" />
+                        <input type="text" asp-for="TaskName" class="form-control" placeholder="Enter task name">
+                        <span asp-validation-for="TaskName" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-4">
+                    <div class="form-group">
+                        <label for="Description">Description</label>
+                        <input type="text" asp-for="Description" class="form-control" placeholder="Enter description">
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
+                </div>
+
+                @*<div class="col-12 col-md-4">
+                    <div class="form-group">
+                        <label for="Status">Status</label>
+                        <input type="text" asp-for="Status" class="form-control" placeholder="Enter status">
+                        <span asp-validation-for="Status" class="text-danger"></span>
+                    </div>
+                </div>*@
+
+                <div class="col-12 col-md-4">
+                    <div class="form-group">
+                        <label for="EstimatedHours">Estimated Hours</label>
+                        <input type="text" asp-for="EstimatedHours" class="form-control" placeholder="Enter estimated hours">
+                        <span asp-validation-for="EstimatedHours" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-4">
+                    <div class="form-group">
+                        <label for="StartDate">Start Date</label>
+                        <input type="date" asp-for="StartDate" class="form-control">
+                        <span asp-validation-for="StartDate" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-4">
+                    <div class="form-group">
+                        <label for="EndDate">Estimated EndDate</label>
+                        <input type="date" asp-for="EndDate" class="form-control">
+                        <span asp-validation-for="EndDate" class="text-danger"></span>
+                    </div>
+                </div>
+
+
+                <div class="col-12 col-md-4">
+                    <div class="form-group">
+                        <label for="AssignedTo">Team Tead</label>
+                        <select asp-for="AssignedTo" class="form-control" asp-items="Model.EngineerName">
+                        </select>
+                        <span asp-validation-for="AssignedTo" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-row priority-row">
+                    <div class="col-12 col-md-4">
+                        <label>Task Priority</label>
+                        <div class="priority-options">
+                            <label>
+                                <input type="radio" name="Priority" value="High"
+                                @(Model.Priority == "High" ? "checked" : "")> High
+                            </label>
+                            <label>
+                                <input type="radio" name="Priority" value="Medium"
+                                @(Model.Priority == "Medium" ? "checked" : "")> Medium
+                            </label>
+                            <label>
+                                <input type="radio" name="Priority" value="Low"
+                                @(Model.Priority == "Low" ? "checked" : "")> Low
+                            </label>
+                        </div>
+                        <input type="hidden" id="Status" name="Status" asp-for="Priority" />
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="form-actions" style="display: flex; justify-content: center;">
+                <button type="submit" class="btn btn-primary">Update Task</button>
+                <button type="button" class="btn btn-secondary">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>

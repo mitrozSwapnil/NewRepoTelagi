@@ -1,0 +1,304 @@
+﻿@model IEnumerable<TelgeProject.Models.KrareportViewModel>
+
+<head>
+    <style>
+        h3 {
+            margin-bottom: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+
+        thead {
+            background-color: #d9e8fb;
+        }
+
+
+
+        input, select {
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .tabs {
+            display: flex;
+            margin-bottom: 20px;
+        }
+
+        .tab {
+            padding: 10px 20px;
+            background-color: #f6f8fa;
+            border: 1px solid #ccc;
+            cursor: pointer;
+            font-weight: bold;
+            color: #333;
+            margin-left: 5%;
+        }
+
+            .tab.active {
+                background-color: #3c6eb;
+                /* border-top: 2px solid #8CBAFF;*/
+            }
+
+        .tab-content {
+            background-color: #ffffff;
+            border: 1px solid #c3cfe6;
+            padding: 20px;
+            border-radius: 4px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+
+
+        input, select, textarea, button {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+
+
+
+
+        .table-container {
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: justify;
+        }
+
+        th {
+            background-color: #e0e7ff;
+        }
+
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+
+            .form-actions button {
+                width: auto;
+            }
+
+        .toggle-group {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+            .toggle-group input {
+                width: auto;
+            }
+
+
+
+        .form-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            flex: 1; /* Adjusts width evenly */
+        }
+
+        .toggle-group {
+            display: flex;
+            gap: 4x.5rem;
+            align-items: center;
+        }
+
+
+
+
+        .col-md-5 {
+            width: 75.666667%;
+        }
+
+        .containerOne {
+            width: 1227px !important;
+        }
+
+        .form-control {
+            border-radius: 19px;
+        }
+
+        .form-group textarea {
+            width: 100%;
+            height: 93px;
+            padding: 18px;
+            border: 1px solid #e5e6e7;
+            outline: none;
+            line-height: 31px;
+        }
+
+        .btn-primary.active, .btn-primary:active, .open > .dropdown-toggle.btn-primary {
+            color: #000;
+            background-color: #8CBAFF;
+            border-color: #999;
+        }
+    </style>
+</head>
+<body>
+    <div class="tabs">
+        <a asp-action="KRAIndex" asp-controller="Kra" class="tab  btn btn-primary">KRA Generation</a>
+        <a asp-action="Krareport" asp-controller="Kra" class="tab active btn btn-primary">KRAReport</a>
+    </div>
+
+    <div class="containerOne my-5">
+        <label for="year">Select Year</label><br>
+        <select type="text" id="year" name="year" style="width: 25%; border-radius:15px ; margin-bottom:20px"></select>
+
+        <div class="my-4">
+            <table class="table table-bordered table-striped table-hover">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>SR NO</th>
+                        <th>KRA Name</th>
+                        <th>Quarter</th>
+                        <th>Total Employee</th>
+                        <th>KRA Submitted</th>
+                        <th>KRA Pending</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null)
+                    {
+                        int srNo = 1;
+                        foreach (var kra in Model)
+                        {
+                            <tr>
+                                <td>@srNo</td>
+                                <td>@kra.KraName</td>
+                                <td>Quarter @kra.Quarter</td>
+                                <td>@kra.TotalEmp</td>
+                                <td>@kra.Kra_Submited</td>
+                                <td>@kra.Kra_Pending</td>
+                                <td>
+                                    <a asp-action="KraReportEmployee" asp-controller="Kra" asp-route-id="@kra.KraId" class="btn btn-primary btn-sm">View</a>
+                                </td>
+                            </tr>
+                            srNo++;
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="7" class="text-center">No data available</td>
+                        </tr>
+                    }
+                </tbody>
+                @*<tbody>
+                <tr>
+                <td>1</td>
+                <td>Sales Performance</td>
+                <td>Quarter 1</td>
+                <td>50</td>
+                <td>40</td>
+                <td>10</td>
+                <td><a asp-action="KraReportEmployee" asp-controller="Kra" class="btn btn-primary btn-sm">View</a></td>
+                </tr>
+                <tr>
+                <td>2</td>
+                <td>Product Development</td>
+                <td>Quarter 1</td>
+                <td>30</td>
+                <td>25</td>
+                <td>5</td>
+                <td><a asp-action="KraReportEmployee" asp-controller="Kra" class="btn btn-primary btn-sm">View</a></td>
+                </tr>
+                <tr>
+                <td>3</td>
+                <td>Marketing</td>
+                <td>Quarter 1</td>
+                <td>40</td>
+                <td>35</td>
+                <td>5</td>
+                <td><a asp-action="KraReportEmployee" asp-controller="Kra" class="btn btn-primary btn-sm">View</a></td>
+                </tr>
+                <tr>
+                <td>4</td>
+                <td>HR Management</td>
+                <td>Quarter 1</td>
+                <td>20</td>
+                <td>15</td>
+                <td>5</td>
+                <td><a asp-action="KraReportEmployee" asp-controller="Kra" class="btn btn-primary btn-sm">View</a></td>
+                </tr>
+                </tbody>*@
+            </table>
+        </div>
+
+        <input type="hidden" id="kraDescriptions" name="KraDescriptions" />
+
+
+
+
+
+
+    </div>
+
+
+    <script>
+        // Get the current year
+        const currentYear = new Date().getFullYear();
+
+        // Set the starting year as 2000
+        const startYear = 2000;
+
+        // Select the year dropdown
+        const yearDropdown = document.getElementById('year');
+
+        // Generate a large number of year groups (let's say 100 years from 2000 onward)
+        const numberOfYears = 100;  // Adjust this number based on how many years you want to show
+
+        for (let i = 0; i < numberOfYears; i++) {
+            const startYearGroup = startYear + i;
+            const endYearGroup = startYearGroup + 1;
+            const yearGroup = ${ startYearGroup }-${ endYearGroup.toString().slice(-2) };
+
+            // Create an option element for each year group
+            const option = document.createElement('option');
+            option.value = yearGroup;
+            option.textContent = yearGroup;
+
+            // Append the option to the dropdown
+            yearDropdown.appendChild(option);
+        }
+
+    </script>
+
+
+
+</body>

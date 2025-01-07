@@ -1,0 +1,409 @@
+﻿@model AddTaskViewModel
+<head>
+    <style>
+        h3 {
+            margin-bottom: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+
+        thead {
+            background-color: #d9e8fb;
+        }
+
+        button {
+            background-color: #6c63ff;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+            button:hover {
+                background-color: #5853d6;
+            }
+
+            button.delete-btn {
+                background-color: #f44336;
+            }
+
+                button.delete-btn:hover {
+                    background-color: #d32f2f;
+                }
+
+        input, select {
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+
+    </style>
+</head>
+
+<body>
+    <div class="containerOne my-5">
+        <div class="task-form-container">
+            <form asp-action="AddTask" method="post" enctype="multipart/form-data" class="task-form">
+                <h2 class="form-title">Task Details</h2>
+                <div class="row">
+
+                    <div class="col-12 col-md-4">
+                        <div class="form-group">
+                            <label for="ProjectId">TaskName</label>
+                            <input type="hidden" asp-for="ProjectId" class="form-control">
+                            <input type="ProjectName" asp-for="ProjectName" class="form-control" readonly>
+                        </div>
+                    </div>
+
+                    @*<div class="col-12 col-md-4">
+                        <div class="form-group">
+                            <label for="ProjectId">Project Name</label>
+                            <select asp-for="ProjectId" class="form-control" asp-items="Model.ProjectNames">
+
+                            </select>
+                        </div>
+                    </div>*@
+
+                    <div class="col-12 col-md-4">
+                        <div class="form-group">
+                            <label for="AssignedTo">AssignedTo</label>
+                            <select asp-for="AssignedTo" class="form-control" asp-items="Model.EngineerName">
+                                @*<option value="">Select AssignedTo</option>*@
+                            </select>
+                            @*<span asp-validation-for="ProjectManager" class="text-danger"></span>*@
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-md-4">
+                        <div class="form-group">
+                            <label for="TaskName">TaskName</label>
+                            <input type="text" asp-for="TaskName" class="form-control" placeholder="Enter task name">
+                            @*<span asp-validation-for="Status" class="text-danger"></span>*@
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-md-4">
+                        <div class="form-group">
+                            <label for="EstimatedHours">Estimated Hours</label>
+                            <input type="text" asp-for="EstimatedHours" class="form-control" placeholder="Enter estimate hours">
+                            @*<span asp-validation-for="Status" class="text-danger"></span>*@
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-md-4">
+                        <div class="form-group">
+                            <label for="Description">Description</label>
+                            <input type="text" asp-for="Description" class="form-control" placeholder="Enter description">
+                            @*<span asp-validation-for="Status" class="text-danger"></span>*@
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-md-4">
+                        <div class="form-group">
+                            <label for="StartDate">StartDate</label>
+                            <input type="date" asp-for="StartDate" class="form-control">
+                            @*<span asp-validation-for="StartDate" class="text-danger"></span>*@
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-md-4">
+                        <div class="form-group">
+                            <label for="EndDate">Estimated EndDate</label>
+                            <input type="date" asp-for="EndDate" class="form-control">
+                            @*<span asp-validation-for="EstimatedEndDate" class="text-danger"></span>*@
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-md-4">
+                        <div class="form-group">
+                            <label for="DocumentName">Upload Document</label>
+                            <input type="file" asp-for="DocumentName" class="form-control" accept=".jpg, .jpeg, .png, .pdf, .xls, .xlsx, .doc, .docx" multiple />
+                        </div>
+                    </div>
+
+                    <div class="form-row priority-row">
+                        <div class="col-12 col-md-4">
+                            <label>Task Priority</label>
+                            <div class="priority-options">
+                                <label><input type="radio" name="priority" value="High" checked> High</label>
+                                <label><input type="radio" name="priority" value="Medium"> Medium</label>
+                                <label><input type="radio" name="priority" value="Low"> Low</label>
+                            </div>
+                            <input type="hidden" id="Status" name="Status" asp-for="Priority" />
+                        </div>
+                        
+                    </div>
+
+                    @*<div class="col-12 col-md-4">
+                        <div class="form-group">
+                            <label for="Status">Task Priority</label>
+                            <select asp-for="Status" class="form-control">
+                                <option value="1">Hign</option>
+                                <option value="2">Medium</option>
+                                <option value="3">Low</option>
+                            </select>
+                        </div>
+                    </div>*@
+
+                    
+                    <div class="col-12 col-md-12 subtask-container">
+                        <h3>Subtask Assignment</h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Sr.no</th>
+                                    <th>Subtask Name</th>
+                                    <th>Estimated Hours</th>
+                                    <th>Start Date</th>
+                                    <th>End Date</th>
+                                    <th>Priority</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="subtaskTableBody">
+                                <tr>
+                                    <td>0.</td>
+                                    <td><input type="text" id="taskName" placeholder="Enter task name..." /></td>
+                                    <td><input type="text" id="estimatedHours" placeholder="Enter estimated hours" /></td>
+                                    <td><input type="date" id="startDate" /></td>
+                                    <td><input type="date" id="endDate" /></td>
+                                    <td>
+                                        <select id="priority">
+                                            <option value="Not Assigned">Not Assigned</option>
+                                            <option value="High">High</option>
+                                            <option value="Medium">Medium</option>
+                                            <option value="Low">Low</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <button type="button" id="addTaskBtn" class="btn btn-success">Add</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <br /> <br />
+
+                    <div class="col-12 col-md-12">
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary">Create Task</button>
+                            <button type="button" class="btn btn-secondary">Cancel</button>
+                        </div>
+                    </div>
+                    
+                </div>
+            </form>
+        </div>
+    </div>
+
+    
+
+
+
+
+    @*<script>
+        document.querySelector('.task-form').addEventListener('submit', function () {
+            const selectedPriorities = Array.from(document.querySelectorAll('.priority-checkbox:checked'))
+                .map(checkbox => checkbox.value)
+                .join(', ');
+
+            document.getElementById('Status').value = selectedPriorities;
+        });
+    </script>*@
+
+    <script>
+        document.querySelector('.task-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const selectedPriority = document.querySelector('input[name="priority"]:checked').value;
+
+            document.getElementById('Status').value = selectedPriority;
+
+            const formData = new FormData(this); 
+
+            $.ajax({
+                url: '/TaskSubTasks/AddTask', 
+                method: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function (response) {
+                    if (response.redirectUrl) {
+                        window.location.href = response.redirectUrl;
+                    } else {
+                        alert('Task saved successfully but no redirection URL provided.');
+                    }
+                },
+                error: function (error) {
+                    alert('Error saving priority.');
+                }
+            });
+        });
+    </script>
+
+
+    <script>
+        let taskId = 1;
+
+        document.getElementById("addTaskBtn").addEventListener("click", () => {
+            const taskName = document.getElementById("taskName").value.trim();
+            const estimatedHours = document.getElementById("estimatedHours").value.trim();
+            const startDate = document.getElementById("startDate").value.trim();
+            const endDate = document.getElementById("endDate").value.trim();
+            const priority = document.getElementById("priority").value.trim();
+
+            if (taskName && estimatedHours && startDate && endDate && priority) {
+                const tableBody = document.getElementById("subtaskTableBody");
+
+                // Create a new row with input values
+                const newRow = document.createElement("tr");
+                newRow.innerHTML = `
+                                <td>${taskId}.</td>
+                                <td>${taskName}</td>
+                                <td>${estimatedHours} Hours</td>
+                                <td>${startDate}</td>
+                                <td>${endDate}</td>
+                                <td>${priority}</td>
+                                <td><button class="delete-btn" onclick="deleteTask(this)">Delete</button></td>
+                            `;
+
+                // Append hidden inputs for each subtask field
+                newRow.innerHTML += `
+                                <input type="hidden" name="SubTasks[${taskId - 1}].SubTaskName" value="${taskName}" />
+                                <input type="hidden" name="SubTasks[${taskId - 1}].EstimatedHours" value="${estimatedHours}" />
+                                <input type="hidden" name="SubTasks[${taskId - 1}].StartDate" value="${startDate}" />
+                                <input type="hidden" name="SubTasks[${taskId - 1}].EndDate" value="${endDate}" />
+                                <input type="hidden" name="SubTasks[${taskId - 1}].Priority" value="${priority}" />
+                            `;
+
+                tableBody.appendChild(newRow);
+                taskId++;
+
+                // Clear inputs
+                document.getElementById("taskName").value = "";
+                document.getElementById("estimatedHours").value = "";
+                document.getElementById("startDate").value = "";
+                document.getElementById("endDate").value = "";
+                document.getElementById("priority").value = "";
+            } else {
+                alert("Please fill out all fields.");
+            }
+        });
+
+        function deleteTask(button) {
+            button.parentElement.parentElement.remove();
+        }
+    </script>
+
+    @*<script>
+        document.getElementById("addTaskBtn").addEventListener("click", () => {
+            const taskName = document.getElementById("taskName").value;
+            const estimatedHours = document.getElementById("estimatedHours").value;
+            const startDate = document.getElementById("startDate").value;
+            const endDate = document.getElementById("endDate").value;
+            const priority = document.getElementById("priority").value;
+
+            if (taskName && estimatedHours && startDate && endDate && priority) {
+                const tableBody = document.getElementById("subtaskTableBody");
+
+                const newRow = document.createElement("tr");
+                newRow.innerHTML = `
+                    <td>${taskId}.</td>
+                    <td>${taskName}</td>
+                    <td>${estimatedHours} Hours</td>
+                    <td>${startDate}</td>
+                    <td>${endDate}</td>
+                    <td>${priority}</td>
+                    <td><button class="delete-btn" onclick="deleteTask(this)">Delete</button></td>
+                `;
+
+                // Add hidden inputs for each subtask field
+                const hiddenInputs = `
+                    <input type="hidden" name="SubTasks[${taskId - 1}].SubTaskName" value="${taskName}" />
+                    <input type="hidden" name="SubTasks[${taskId - 1}].EstimatedHours" value="${estimatedHours}" />
+                    <input type="hidden" name="SubTasks[${taskId - 1}].StartDate" value="${startDate}" />
+                    <input type="hidden" name="SubTasks[${taskId - 1}].EndDate" value="${endDate}" />
+                    <input type="hidden" name="SubTasks[${taskId - 1}].Priority" value="${priority}" />
+                `;
+                newRow.innerHTML += hiddenInputs;
+
+                tableBody.appendChild(newRow);
+                taskId++;
+
+                // Clear inputs
+                document.getElementById("taskName").value = "";
+                document.getElementById("estimatedHours").value = "";
+                document.getElementById("startDate").value = "";
+                document.getElementById("endDate").value = "";
+                document.getElementById("priority").value = "";
+            } else {
+                alert("Please fill out all fields.");
+            }
+        });
+
+        function deleteTask(button) {
+            button.parentElement.parentElement.remove();
+        }
+
+    </script>
+
+    <script>
+        let taskId = 1;
+
+        document.getElementById("addTaskBtn").addEventListener("click", () => {
+            const taskName = document.getElementById("taskName").value;
+            const estimatedHours = document.getElementById("estimatedHours").value;
+            const startDate = document.getElementById("startDate").value;
+            const endDate = document.getElementById("endDate").value;
+            const priority = document.getElementById("priority").value;
+
+            if (taskName && estimatedHours && startDate && endDate && priority) {
+                const tableBody = document.getElementById("subtaskTableBody");
+
+                const newRow = document.createElement("tr");
+                newRow.innerHTML = `
+              <td>${taskId}.</td>
+              <td>${taskName}</td>
+              <td>${estimatedHours} Hours</td>
+              <td>${startDate}</td>
+              <td>${endDate}</td>
+              <td>${priority}</td>
+              <td><button class="delete-btn" onclick="deleteTask(this)">Delete</button></td>
+            `;
+
+                tableBody.appendChild(newRow);
+                taskId++;
+
+                // Clear inputs
+                document.getElementById("taskName").value = "";
+                document.getElementById("estimatedHours").value = "";
+                document.getElementById("startDate").value = "";
+                document.getElementById("endDate").value = "";
+                document.getElementById("priority").value = "";
+            } else {
+                alert("Please fill out all fields.");
+            }
+        });
+
+        function deleteTask(button) {
+            button.parentElement.parentElement.remove();
+        }
+
+
+    </script>*@
+
+    
+
+
+</body>

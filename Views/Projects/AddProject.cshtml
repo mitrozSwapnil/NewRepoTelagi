@@ -1,0 +1,278 @@
+﻿@model ProjectViewModel
+
+
+<h2 style="margin-left: 32px;">Create New Project</h2>
+<div class="containerOne my-5">
+    <div class="task-form-container">
+        <form asp-action="AddProject" method="post" class="task-form" enctype="multipart/form-data">
+            <h2 class="form-title">Project Details</h2>
+            <div class="row">
+                <div class="col-12 col-md-4">
+                    <div class="form-group">
+                        <label for="ProjectName">Project Name</label>
+                        <input type="text" asp-for="ProjectName" class="form-control" placeholder="Enter project name">
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-4">
+                    <div class="form-group">
+                        <label for="ProjectNumber">Project Number</label>
+                        <input type="text" asp-for="ProjectNumber" class="form-control" value="@Model.ProjectNumber" placeholder="Enter project number" readonly>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-4">
+                    <div class="form-group">
+                        <label for="Address">Address</label>
+                        <input type="text" asp-for="Address" class="form-control" placeholder="Enter address">
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-4">
+                    <div class="form-group">
+                        <label for="Location">Location</label>
+                        <input type="text" asp-for="Location" class="form-control" placeholder="Enter location">
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-4">
+                    <div class="form-group">
+                        <label for="Country">Country</label>
+                        <select id="Country" name="Country" class="form-control">
+                            <option value="">Select Country</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-4">
+                    <div class="form-group">
+                        <label for="State">State</label>
+                        <select id="State" name="State" class="form-control">
+                            <option value="">Select State</option>
+                        </select>
+                    </div>
+                </div>
+
+
+                <div class="col-12 col-md-4">
+                    <div class="form-group">
+                        <label for="Contractor">Contractor</label>
+                        <input type="text" asp-for="Contractor" class="form-control" placeholder="Enter contractor">
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-4">
+                    <div class="form-group">
+                        <label for="ProjectAwardedFrom">Project Awarded From</label>
+                        <input type="text" asp-for="ProjectAwardedFrom" class="form-control" placeholder="Enter project awarded">
+                    </div>
+                </div>
+
+            </div>
+
+            <h2 class="form-title">Project Assignment</h2>
+
+            <div class="row">
+                <div class="col-12 col-md-4">
+                    <div class="form-group">
+                        <label for="PrecasterFabricator">Precaster Fabricator</label>
+                        <input type="text" asp-for="PrecasterFabricator" class="form-control" placeholder="Enter precaster fabricator">
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-4">
+                    <div class="form-group">
+                        <label for="StructuralDesigner">Structural Designer</label>
+                        <input type="text" asp-for="StructuralDesigner" class="form-control" placeholder="Enter structural designer">
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-4">
+                    <div class="form-group">
+                        <label for="Architecture">Architecture</label>
+                        <input type="text" asp-for="Architecture" class="form-control" placeholder="Enter architecture">
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-4">
+                    <div class="form-group">
+                        <label for="ModellingDetailingFirm">Modelling/Detailing Firm</label>
+                        <input type="text" asp-for="ModellingDetailingFirm" class="form-control" placeholder="Enter modelling">
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-4">
+                    <div class="form-group">
+                        <label for="EstimatedHours">Estimated Hours</label>
+                        <input type="text" id="EstimatedHours" asp-for="EstimatedHours" class="form-control" placeholder="Enter estimated hours">
+                    </div>
+                </div>
+
+
+                <div class="col-12 col-md-4">
+                    <div class="form-group">
+                        <label for="HourlyRate">Hourly Rate</label>
+                        <input type="text" id="HourlyRate" asp-for="HourlyRate" class="form-control" placeholder="Enter hourly rate">
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-4">
+                    <div class="form-group">
+                        <label for="Budget">Budget</label>
+                        <input type="text" id="Budget" asp-for="Budget" class="form-control" placeholder="Enter budget" readonly>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-4">
+                    <div class="form-group">
+                        <label for="StartDate">StartDate</label>
+                        <input type="date" asp-for="StartDate" class="form-control">
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-4">
+                    <div class="form-group">
+                        <label for="EstimatedEndDate">Estimated EndDate</label>
+                        <input type="date" asp-for="EstimatedEndDate" class="form-control">
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-4">
+                    <div class="form-group">
+                        <label for="Status">Status</label>
+                        <select asp-for="Status" class="form-control">
+                            <option value="Ongoing">Ongoing</option>
+                            @*<option value="Completed">Completed</option>
+                            <option value="Cancelled">Cancelled</option>*@
+                        </select>
+                    </div>
+                </div>
+
+
+                <div class="col-12 col-md-4">
+                    <div class="form-group">
+                        <label for="ProjectManager">Project Manager</label>
+                        <select asp-for="ProjectManager" class="form-control" asp-items="Model.ProjectManagers">
+                            @*<option value="">Select Project Manager</option>*@
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-4">
+                    <div class="form-group">
+                        <label for="TeamLeadId">Team Tead</label>
+                        <select asp-for="TeamLeadId" class="form-control" asp-items="Model.TeamLeads">
+                            
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-4">
+                    <div class="form-group">
+                        <label for="Customer">Customer</label>
+                        <select asp-for="Customer" class="form-control" asp-items="Model.Customers">
+                            @*<option value="">Select Customer</option>*@
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-4">
+                    <div class="form-group">
+                        <label for="DeparmentId">Deparment</label>
+                        <select asp-for="DeparmentId" class="form-control" asp-items="Model.Deparments">
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-4">
+                    <div class="form-group">
+                        <label for="Document">Upload Document</label>
+                        <input type="file" asp-for="Document" class="form-control" accept=".jpg, .jpeg, .png, .pdf, .xls, .xlsx, .doc, .docx" multiple />
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-12">
+                    <div class="form-group">
+                        <label for="Description">Description</label>
+                        <textarea asp-for="Description" class="form-control" placeholder="Write description" rows="2"></textarea>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="form-actions" style="display: flex; justify-content: center;">
+                <button type="submit" class="btn btn-primary">Create Project</button>
+                <button type="button" class="btn btn-secondary">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@*Code for State and Country*@
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        const countryDropdown = $('#Country');
+        const stateDropdown = $('#State');
+
+        // Fetch all countries
+        $.ajax({
+            url: 'https://countriesnow.space/api/v0.1/countries',
+            method: 'GET',
+            success: function (response) {
+                if (response.error === false) {
+                    const countries = response.data;
+                    countries.forEach(country => {
+                        countryDropdown.append(new Option(country.country, country.country));
+                    });
+                }
+            },
+            error: function () {
+                alert('Failed to load countries');
+            }
+        });
+
+        // Event listener for country change
+        countryDropdown.change(function () {
+            const selectedCountry = $(this).val();
+            stateDropdown.empty().append(new Option("Select State", ""));
+
+            // Fetch states for the selected country
+            if (selectedCountry) {
+                $.ajax({
+                    url: 'https://countriesnow.space/api/v0.1/countries/states',
+                    method: 'POST',
+                    data: JSON.stringify({ country: selectedCountry }),
+                    contentType: 'application/json',
+                    success: function (response) {
+                        if (response.error === false) {
+                            const states = response.data.states;
+                            states.forEach(state => {
+                                stateDropdown.append(new Option(state.name, state.name));
+                            });
+                        }
+                    },
+                    error: function () {
+                        alert('Failed to load states');
+                    }
+                });
+            }
+        });
+    });
+</script>
+
+@*Code for Caluction*@
+<script>
+    function calculateBudget() {
+        const estimatedHours = parseFloat(document.getElementById("EstimatedHours").value) || 0;
+        const hourlyRate = parseFloat(document.getElementById("HourlyRate").value) || 0;
+
+        const budget = estimatedHours * hourlyRate;
+
+        document.getElementById("Budget").value = budget.toFixed(2);
+    }
+
+    document.getElementById("EstimatedHours").addEventListener("input", calculateBudget);
+    document.getElementById("HourlyRate").addEventListener("input", calculateBudget);
+</script>

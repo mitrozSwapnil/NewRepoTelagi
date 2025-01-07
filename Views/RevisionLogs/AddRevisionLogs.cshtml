@@ -1,0 +1,94 @@
+﻿@model RevisionLogsViewModel
+
+<h2 style="margin-left: 32px;">Revision Logs</h2>
+<div class="containerOne my-5">
+    <div class="task-form-container">
+        <form asp-action="AddRevisionLogs" method="post" enctype="multipart/form-data" class="task-form">
+            <div class="row">
+                <input type="hidden" asp-for="ProjectId" />
+
+                <div class="col-12 col-md-6">
+                    <div class="form-group">
+                        <label for="ScopeOfWork">Scope of work revised</label>
+                        <textarea type="text" asp-for="ScopeOfWork" class="form-control" placeholder="Write..."></textarea>
+                        <span asp-validation-for="ScopeOfWork" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-6">
+                    <div class="form-group">
+                        <label for="Reason">Reason for change</label>
+                        <textarea type="text" asp-for="Reason" class="form-control" placeholder="reason..."></textarea>
+                        <span asp-validation-for="Reason" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-4">
+                    <div class="form-group">
+                        <label for="SubmittedDate">Revision submitted Date</label>
+                        <input type="date" asp-for="SubmittedDate" class="form-control">
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-4">
+                    <div class="form-group">
+                        <label for="ReceivedDate">Revision received date</label>
+                        <input type="date" asp-for="ReceivedDate" class="form-control">
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-4">
+                    <div class="form-group">
+                        <label for="ManHours">Man hours for revision</label>
+                        <input type="text" asp-for="ManHours" class="form-control" placeholder="Enter man hours">
+                        <span asp-validation-for="ManHours" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-4">
+                    <div class="form-group">
+                        <label for="RevisionBy">Revision by</label>
+                        <input type="text" asp-for="RevisionBy" class="form-control" placeholder="Revision by">
+                        <span asp-validation-for="RevisionBy" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-4">
+                    <div class="form-group">
+                        <label for="ExecutedBy">Executed by</label>
+                        <input type="text" asp-for="ExecutedBy" class="form-control" placeholder="executed by">
+                        <span asp-validation-for="ExecutedBy" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-4">
+                    <div class="form-group">
+                        <label for="Remark">Remark</label>
+                        <input type="text" asp-for="Remark" class="form-control" placeholder="Enter remark">
+                        <span asp-validation-for="Remark" class="text-danger"></span>
+                    </div>
+                </div>
+
+                @*<div class="col-12 col-md-6">
+                    <div class="form-group">
+                        <label for="DocumentName">Attach Documents</label>
+                        <input type="file" name="uploadedDocuments" multiple class="form-control">
+                    </div>
+                </div>*@
+                <div class="col-12 col-md-4">
+                    <div class="form-group">
+                        <label for="DocumentName">Upload Document</label>
+                        <input type="file" asp-for="DocumentName" class="form-control" accept=".jpg, .jpeg, .png, .pdf, .xls, .xlsx, .doc, .docx" multiple />
+                    </div>
+                </div>
+
+
+            </div>
+
+            <div class="form-actions" style="display: flex; justify-content: center;">
+                <button type="submit" class="btn btn-primary">Save</button>
+                <button type="button" class="btn btn-secondary">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>

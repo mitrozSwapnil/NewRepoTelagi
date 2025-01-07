@@ -1,0 +1,335 @@
+﻿@model ProjectViewModel
+
+
+<h2 style="margin-left: 32px;">Create New Project</h2>
+<div class="containerOne my-5">
+    <div class="task-form-container">
+        <form asp-action="UpdateProject" method="post" class="task-form">
+            <h2 class="form-title">Project Details</h2>
+            <div class="row">
+                <div class="col-12 col-md-4">
+                    <div class="form-group">
+                        <label for="ProjectName">Project Name</label>
+                        <input type="hidden" asp-for="ProjectId" />
+                        <input type="text" asp-for="ProjectName" class="form-control" placeholder="Enter project name">
+                        <span asp-validation-for="ProjectName" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-4">
+                    <div class="form-group">
+                        <label for="ProjectNumber">Project Number</label>
+                        <input type="text" asp-for="ProjectNumber" class="form-control" placeholder="Enter project number">
+                        <span asp-validation-for="ProjectNumber" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-4">
+                    <div class="form-group">
+                        <label for="Address">Address</label>
+                        <input type="text" asp-for="Address" class="form-control" placeholder="Enter address">
+                        <span asp-validation-for="Address" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-4">
+                    <div class="form-group">
+                        <label for="Location">Location</label>
+                        <input type="text" asp-for="Location" class="form-control" placeholder="Enter location">
+                        <span asp-validation-for="Location" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-4">
+                    <div class="form-group">
+                        <label for="Country">Country</label>
+                        <select id="Country" name="Country" class="form-control" asp-for="Country">
+                            <option value="">Select Country</option>
+                        </select>
+                        <span asp-validation-for="Country" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-4">
+                    <div class="form-group">
+                        <label for="State">State</label>
+                        <select id="State" name="State" class="form-control" asp-for="State">
+                            <option value="">Select State</option>
+                        </select>
+                        <span asp-validation-for="State" class="text-danger"></span>
+                    </div>
+                </div>
+
+
+                <div class="col-12 col-md-4">
+                    <div class="form-group">
+                        <label for="Contractor">Contractor</label>
+                        <input type="text" asp-for="Contractor" class="form-control" placeholder="Enter contractor">
+                        <span asp-validation-for="Contractor" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-4">
+                    <div class="form-group">
+                        <label for="ProjectAwardedFrom">Project Awarded From</label>
+                        <input type="text" asp-for="ProjectAwardedFrom" class="form-control" placeholder="Enter project awarded">
+                        <span asp-validation-for="ProjectAwardedFrom" class="text-danger"></span>
+                    </div>
+                </div>
+
+            </div>
+
+            <h2 class="form-title">Project Assignment</h2>
+
+            <div class="row">
+                <div class="col-12 col-md-4">
+                    <div class="form-group">
+                        <label for="PrecasterFabricator">Precaster Fabricator</label>
+                        <input type="text" asp-for="PrecasterFabricator" class="form-control" placeholder="Enter precaster fabricator">
+                        <span asp-validation-for="PrecasterFabricator" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-4">
+                    <div class="form-group">
+                        <label for="StructuralDesigner">Structural Designer</label>
+                        <input type="text" asp-for="StructuralDesigner" class="form-control" placeholder="Enter structural designer">
+                        <span asp-validation-for="StructuralDesigner" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-4">
+                    <div class="form-group">
+                        <label for="Architecture">Architecture</label>
+                        <input type="text" asp-for="Architecture" class="form-control" placeholder="Enter architecture">
+                        <span asp-validation-for="Architecture" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-4">
+                    <div class="form-group">
+                        <label for="ModellingDetailingFirm">Modelling/Detailing Firm</label>
+                        <input type="text" asp-for="ModellingDetailingFirm" class="form-control" placeholder="Enter modelling">
+                        <span asp-validation-for="ModellingDetailingFirm" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-4">
+                    <div class="form-group">
+                        <label for="EstimatedHours">Estimated Hours</label>
+                        <input type="text" id="EstimatedHours" asp-for="EstimatedHours" class="form-control" placeholder="Enter estimated hours">
+                        <span asp-validation-for="EstimatedHours" class="text-danger"></span>
+                    </div>
+                </div>
+
+                
+
+                <div class="col-12 col-md-4">
+                    <div class="form-group">
+                        <label for="HourlyRate">Hourly Rate</label>
+                        <input type="text" id="HourlyRate" asp-for="HourlyRate" class="form-control" placeholder="Enter hourly rate">
+                        <span asp-validation-for="HourlyRate" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-4">
+                    <div class="form-group">
+                        <label for="Budget">Budget</label>
+                        <input type="text" id="Budget" asp-for="Budget" class="form-control" placeholder="Enter budget" readonly>
+                        <span asp-validation-for="Budget" class="text-danger"></span>
+                    </div>
+                </div>
+
+
+                <div class="col-12 col-md-4">
+                    <div class="form-group">
+                        <label for="StartDate">StartDate</label>
+                        <input type="date" asp-for="StartDate" class="form-control">
+                        <span asp-validation-for="StartDate" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-4">
+                    <div class="form-group">
+                        <label for="EstimatedEndDate">Estimated EndDate</label>
+                        <input type="date" asp-for="EstimatedEndDate" class="form-control">
+                        <span asp-validation-for="EstimatedEndDate" class="text-danger"></span>
+                    </div>
+                </div>
+
+                @*<div class="col-12 col-md-4">
+                    <div class="form-group">
+                        <label for="Status">Status</label>
+                        <input type="text" asp-for="Status" class="form-control" placeholder="Enter status">
+                        <span asp-validation-for="Status" class="text-danger"></span>
+                    </div>
+                </div>*@
+                <div class="col-12 col-md-4">
+                    <div class="form-group">
+                        <label for="Status">Status</label>
+                        <select asp-for="Status" asp-items="Model.StatusOptions" class="form-control">
+ 
+                        </select>
+                        <span asp-validation-for="Status" class="text-danger"></span>
+                    </div>
+                </div>
+
+
+
+                <div class="col-12 col-md-4">
+                    <div class="form-group">
+                        <label for="ProjectManager">Project Manager</label>
+                        <select asp-for="ProjectManager" class="form-control" asp-items="Model.ProjectManagers">
+
+                        </select>
+                        <span asp-validation-for="ProjectManager" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-4">
+                    <div class="form-group">
+                        <label for="TeamLeadId">Team Tead</label>
+                        <select asp-for="TeamLeadId" class="form-control" asp-items="Model.TeamLeads">
+                        </select>
+                        <span asp-validation-for="TeamLeadId" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-4">
+                    <div class="form-group">
+                        <label for="Customer">Customer</label>
+                        <select asp-for="Customer" class="form-control" asp-items="Model.Customers">
+
+                        </select>
+                        <span asp-validation-for="Customer" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-4">
+                    <div class="form-group">
+                        <label for="DeparmentId">Deparment</label>
+                        <select asp-for="DeparmentId" class="form-control" asp-items="Model.Deparments">
+                        </select>
+                        <span asp-validation-for="DeparmentId" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-4">
+                    <div class="form-group">
+                        <h4>Existing Documents</h4>
+                        <ul>
+                            @foreach (var document in Model.ExistingDocuments)
+                            {
+                                <li>
+                                    <a href="@Url.Content($"~/{document}")" target="_blank">@document</a>
+                                    <input type="checkbox" name="DocumentsToRemove" value="@document" /> Remove
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+
+                <h4>Upload New Documents</h4>
+                <div class="form-group">
+                    <input type="file" asp-for="Document" multiple class="form-control" />
+                </div>
+
+                <div class="col-12 col-md-12">
+                    <div class="form-group">
+                        <label for="Description">Description</label>
+                        <textarea asp-for="Description" class="form-control" placeholder="Write description" rows="2"></textarea>
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="form-actions" style="display: flex; justify-content: center;">
+                <button type="submit" class="btn btn-primary">Update Project</button>
+                <button type="button" class="btn btn-secondary">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+@*Code for State and Country*@
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        const countryDropdown = $('#Country');
+        const stateDropdown = $('#State');
+
+        // Selected values for editing (these values should be passed from the server to the view)
+        const selectedCountry = '@Model.Country';
+        const selectedState = '@Model.State';
+
+        // Fetch all countries
+        $.ajax({
+            url: 'https://countriesnow.space/api/v0.1/countries',
+            method: 'GET',
+            success: function (response) {
+                if (response.error === false) {
+                    const countries = response.data;
+                    countries.forEach(country => {
+                        const isSelected = country.country === selectedCountry;
+                        countryDropdown.append(new Option(country.country, country.country, isSelected, isSelected));
+                    });
+
+                    // Trigger the change event to load states for the selected country
+                    if (selectedCountry) {
+                        countryDropdown.trigger('change');
+                    }
+                }
+            },
+            error: function () {
+                alert('Failed to load countries');
+            }
+        });
+
+        // Event listener for country change
+        countryDropdown.change(function () {
+            const selectedCountry = $(this).val();
+            stateDropdown.empty().append(new Option("Select State", ""));
+
+            // Fetch states for the selected country
+            if (selectedCountry) {
+                $.ajax({
+                    url: 'https://countriesnow.space/api/v0.1/countries/states',
+                    method: 'POST',
+                    data: JSON.stringify({ country: selectedCountry }),
+                    contentType: 'application/json',
+                    success: function (response) {
+                        if (response.error === false) {
+                            const states = response.data.states;
+                            states.forEach(state => {
+                                const isSelected = state.name === selectedState;
+                                stateDropdown.append(new Option(state.name, state.name, isSelected, isSelected));
+                            });
+                        }
+                    },
+                    error: function () {
+                        alert('Failed to load states');
+                    }
+                });
+            }
+        });
+    });
+
+</script>
+
+
+@*Code for Caluction*@
+<script>
+    function calculateBudget() {
+        const estimatedHours = parseFloat(document.getElementById("EstimatedHours").value) || 0;
+        const hourlyRate = parseFloat(document.getElementById("HourlyRate").value) || 0;
+
+        const budget = estimatedHours * hourlyRate;
+
+        document.getElementById("Budget").value = budget.toFixed(2);
+    }
+
+    document.getElementById("EstimatedHours").addEventListener("input", calculateBudget);
+    document.getElementById("HourlyRate").addEventListener("input", calculateBudget);
+</script>

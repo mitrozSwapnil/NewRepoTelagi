@@ -1,0 +1,109 @@
+﻿
+$bar-graph-max-width: 15rem;
+$bar-graph-min-color: #d7d19f;
+$bar-graph-max-color: #b50b92; 
+
+html {
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-size: 16px;
+  
+  &:has(#font-size-14px:checked) {
+    font-size: 14px;
+  }
+  &:has(#font-size-16px:checked) {
+    font-size: 16px;
+  }
+  &:has(#font-size-20px:checked) {
+    font-size: 20px;
+  }
+  &:has(#font-size-2vw5:checked) {
+    font-size: 2.5vw;
+  }
+}
+
+body {
+  color: black;
+  background: #888;
+  padding: 0 1rem;
+}
+
+fieldset {
+  display: inline-block;
+  
+  .spaced label {
+    white-space: nowrap; 
+    margin-right: 1em;
+    
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
+
+pre {
+  overflow-x: auto;
+}
+
+input[type="radio"] {
+  
+  -webkit-appearance: none;
+  appearance: none;
+  /* For iOS < 15 to remove gradient background */
+  background-color: white;
+  @media (prefers-color-scheme: dark) {
+    background-color: black;
+  }
+  
+  margin: 0 .2em;
+  padding: 0;
+  
+  font: inherit;
+  color: currentColor;
+  width: .7em;
+  height: .7em;
+  outline: .15em solid currentColor;
+  border-radius: 50%;
+  
+  display: inline-grid;
+  place-content: center;
+  
+  &:checked {
+    background-color: $bar-graph-max-color;
+  }
+}
+
+.bar-graph {
+  font-size: .8em;
+  border: 1px solid;
+  border-radius: 1rem;
+  max-width: $bar-graph-max-width;
+  background: rgba(0,0,0, .1); 
+  box-shadow: inset 0 .05rem .2rem rgba(0,0,0, .25); 
+  
+  > div {
+    box-sizing: border-box;
+    color: black;
+   
+    text-shadow: .05rem .05rem 0 rgba(255, 255, 255, 0.25), 
+                 -.05rem -.05rem 0 rgba(0, 0, 0, 0.1); 
+    padding: .1rem .5rem;
+    border-radius: 1rem;
+    text-align: right;
+    background-color: $bar-graph-max-color; 
+    background-image: linear-gradient(
+      90deg,
+      $bar-graph-min-color 0%,
+      $bar-graph-max-color 100%
+    );
+    background-size: $bar-graph-max-width 100%;
+    box-shadow: inset 0 .15rem .1rem rgba(255, 255, 255, .3), 
+                inset 0 -.1rem .2rem rgba(0, 0, 0, .3);
+    
+   
+    @for $i from 1 through 10 {
+      &[data-pourcent="#{$i}0"] {
+        width: $i * 10%;
+      }
+    }
+  } 
+}

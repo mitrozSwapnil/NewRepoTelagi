@@ -1,0 +1,66 @@
+﻿@model CustomerViewModel
+
+
+<h2 style="margin-left: 32px;">Add New Customer</h2>
+<div class="containerOne my-5">
+    <div class="task-form-container">
+        <form asp-action="AddCustomer" method="post" class="task-form">
+            <h2 class="form-title">Customer Details</h2>
+            <div class="row">
+                <div class="col-12 col-md-6">
+                    <div class="form-group">
+                        <label for="FullName">Customer Name</label>
+                        <input type="text" asp-for="FullName" class="form-control" placeholder="Enter customer name">
+                        <span asp-validation-for="FullName" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-6">
+                    <div class="form-group">
+                        <label for="Address">Address</label>
+                        <input type="text" asp-for="Address" class="form-control" placeholder="Enter address">
+                        <span asp-validation-for="Address" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-6">
+                    <div class="form-group">
+                        <label for="Contact">Contact No.</label>
+                        <input type="text" asp-for="Contact" class="form-control" placeholder="Enter contact no">
+                        <span asp-validation-for="Contact" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-6">
+                    <div class="form-group">
+                        <label for="Email">Email</label>
+                        <input type="text" asp-for="Email" class="form-control" placeholder="Enter email">
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-6">
+                    <div class="form-group">
+                        <label for="BussinessName">Bussiness Name</label>
+                        <input type="text" asp-for="BussinessName" class="form-control" placeholder="Enter bussiness name">
+                        <span asp-validation-for="BussinessName" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-6">
+                    <div class="form-group">
+                        <label for="Gstno">Gst No</label>
+                        <input type="text" asp-for="Gstno" class="form-control" placeholder="Enter gst no">
+                        <span asp-validation-for="Gstno" class="text-danger"></span>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="form-actions" style="display: flex; justify-content: center;">
+                <button type="submit" class="btn btn-primary">Save</button>
+                <button type="button" class="btn btn-secondary">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>

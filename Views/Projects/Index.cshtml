@@ -1,0 +1,371 @@
+﻿
+<style>
+    .search-container {
+        position: relative;
+        display: inline-block;
+        width: 100%; /* Adjust as per your layout */
+    }
+
+    .search {
+        border-radius: 49px;
+        background-color: white; /* White background for the search box */
+        border: 1px solid lightgrey;
+        padding: 10px 10px 10px 40px; /* Adjust padding to make room for the icon */
+        width: 100%; /* Full width input */
+        box-sizing: border-box;
+        color: black; /* Text color inside the search box */
+    }
+
+        .search::placeholder {
+            color: grey; /* Placeholder color */
+        }
+
+    .search-icon {
+        position: absolute;
+        top: 50%;
+        left: 10px; /* Adjust left position */
+        transform: translateY(-50%);
+        width: 1.2em;
+        height: 1.2em;
+        pointer-events: none;
+    }
+</style>
+
+<div class="password-meter-area mg-b-15">
+    <div class="container-fluid">
+        <div class="row" style="background-color: white;">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <div class="sparkline12-list responsive-mg-b-30"
+                     style="background-color: #f3f6ff;border-radius: 40px;">
+                   
+                    <div class="row" style="padding: 15px 26px;">
+                        <div class="col-lg-10 col-md-6 col-sm-6 col-xs-12" style="
+    padding: 0px;
+"><h1>Projects</h1>
+                            
+                        </div>
+                        <div class="col-lg-2 col-md-6 col-sm-6 col-xs-12" style="padding: 0px 0px 0px 37px;">
+
+                            <img  src="~/asset/img/group 253.png" style="cursor:pointer" onclick="Addnewproject();" />
+                        </div>
+                    </div>
+                    <div class="row" style="padding: 5px 26px;">
+                        <div class="col-lg-12 col-md-6 col-sm-6 col-xs-12" style="
+    padding: 0px;
+">
+                            <div class="breadcome-heading">
+                                <div class="search-container">
+                                    <!-- Search Icon -->
+                                    <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22" fill="black">
+                                        <path d="M14.92 14.07l6.04 6.04c.23.24.23.62 0 .86-.24.23-.62.23-.85 0l-6.03-6.04C12.57 16.22 10.63 17 8.5 17 3.8 17 0 13.2 0 8.5S3.8 0 8.5 0 17 3.8 17 8.5c0 2.13-.78 4.08-2.08 5.57zM8.5 16c4.14 0 7.5-3.36 7.5-7.5C16 4.36 12.64 1 8.5 1 4.36 1 1 4.36 1 8.5 1 12.64 4.36 16 8.5 16z"></path>
+                                    </svg>
+
+                                    <!-- Search Input -->
+                                    <input type="text" placeholder="Search" class="search">
+                                </div>
+                            </div>
+                        </div>
+                       
+                    </div>
+                     <div class="row" style="padding: 15px 26px;">
+                        <div class="col-lg-2 col-md-6 col-sm-6 col-xs-12" style="
+                            padding: 0px;
+                        ">
+                            <span>Projects</span>
+                        </div>
+                        <div class="col-lg-2 col-md-6 col-sm-6 col-xs-12" style="padding: 0px 0px 0px 25px;">
+                            <select type="text" placeholder="" style="
+    border-radius: 21px;
+    padding: 6px;
+    position: absolute;
+    margin-top: -6px;
+">
+
+                                <option value="1">Ongoing</option>
+                                <option value="2"> Completed </option>
+                                <option value="3"> Pending </option>
+
+                            </select>
+
+                        </div>
+                         <div class="col-lg-2 col-md-6 col-sm-6 col-xs-12" style="padding: 0px 0px 0px 25px;">
+                            
+
+                        </div>
+                         <div class="col-lg-2 col-md-6 col-sm-6 col-xs-12" style="padding: 0px 0px 0px 25px;">
+                            
+
+                        </div>
+                         <div class="col-lg-2 col-md-6 col-sm-6 col-xs-12" style="padding: 0px 0px 0px 25px;">
+                            
+
+                        </div>
+                        <div class="col-lg-2 col-md-6 col-sm-6 col-xs-12" style="padding: 0px 0px 0px 25px;">
+                            <span>View All</span>
+                        </div>
+                    </div>
+
+
+                    <div id="project-container" class="row" style="padding: 15px 26px;"></div>
+
+
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <div class="sparkline11-list">
+                    <div class="sparkline11-hd">
+                        <div class="main-sparkline11-hd">
+                            <span style="color:#7f7f7f;font-size: 20px;padding: 13px;">All Projects (126)</span>
+                            <span style="color:#7f7f7f;margin-left: 62%;">View All</span>
+                        </div>
+                    </div>
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <div class="analytics-sparkle-line reso-mg-b-30"
+                                     style="border-radius: 35px;border: 1px solid #c2d9ff;background-color: #f3f6ff;">
+                                    <div class="analytics-content">
+                                        <p>Completed Projects
+                                        <p>
+                                            <h1>
+                                                41<span class="tuition-fees">
+                                                    <h1>
+                                                        <i class="bi bi-check-circle" style="color: black;"></i>
+                                                    </h1>
+                                                </span>
+                                            </h1>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <div class="analytics-sparkle-line reso-mg-b-30"
+                                     style="border-radius: 35px;border: 1px solid #c2d9ff;background-color: #f3f6ff;">
+                                    <div class="analytics-content">
+                                        <p>Red falgged Projects
+                                        <p>
+                                            <h1>
+                                                30<span class="tuition-fees">
+                                                    <h1><i class="bi bi-flag-fill" style="color: black;"></i></h1>
+                                                </span>
+                                            </h1>
+
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row" style="padding-top: 25px;">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <div class="analytics-sparkle-line reso-mg-b-30"
+                                     style="border-radius: 35px;border: 1px solid #c2d9ff;background-color: #f3f6ff;">
+                                    <div class="analytics-content">
+                                        <p>Pending Projects
+                                        <p>
+                                            <h1>
+                                                20<span class="tuition-fees">
+                                                    <h1><i class="bi bi-hourglass" style="color: black;"></i></h1>
+                                                </span>
+                                            </h1>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <div class="analytics-sparkle-line reso-mg-b-30"
+                                     style="border-radius: 35px;border: 1px solid #c2d9ff;background-color: #f3f6ff;">
+                                    <div class="analytics-content">
+                                        <p>Ongoing Projects
+                                        <p>
+                                            <h1>
+                                                35<span class="tuition-fees">
+                                                    <img src="/Telge-Project//img/ongoing.svg" alt="">
+                                                </span>
+                                            </h1>
+
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="single-review-st-item res-mg-t-30 table-mg-t-pro-n" style="padding: 30px;">
+                    <div class="single-review-st-hd">
+                        <div class="main-sparkline11-hd">
+                            <span style="font-size: 20px;color: grey;">Ongoing Tasks</span>
+                            <span style="margin-left: 71%;color:#7f7f7f;">View All</span>
+                        </div>
+
+                    </div>
+                    <div class="single-review-st-text">
+                        <div class="idiv">
+                            <i class="bi bi-circle-fill i1" style="color:green"></i>
+                        </div>
+                        <div class="review-ctn-hf">
+                            <h3>Task name</h3>
+                            <p style="color: grey;">Project Name | Assigned Team Lead</p>
+                        </div>
+                        <div class="review-item-rating">
+                            <p style="color: green;">Ongoing </p>
+                        </div>
+                    </div>
+                    <div class="single-review-st-text">
+                        <div class="idiv">
+                            <i class="bi bi-circle-fill i1" style="color:red"></i>
+                        </div>
+                        <div class="review-ctn-hf">
+                            <h3>Task name</h3>
+                            <p style="color: grey;">Project Name | Assigned Team Lead</p>
+                        </div>
+                        <div class="review-item-rating">
+                            <p style="color: red;">Pending </p>
+                        </div>
+                    </div>
+                    <div class="single-review-st-text">
+                        <div class="idiv">
+                            <i class="bi bi-circle-fill i1" style="color:grey"></i>
+                        </div>
+                        <div class="review-ctn-hf">
+                            <h3>Task name</h3>
+                            <p style="color: grey;">Project Name | Assigned Team Lead</p>
+                        </div>
+                        <div class="review-item-rating">
+                            <p style="color: grey;">Completed </p>
+                        </div>
+                    </div>
+                    <div class="single-review-st-text">
+                        <div class="idiv">
+                            <i class="bi bi-circle-fill i1" style="color:green"></i>
+                        </div>
+                        <div class="review-ctn-hf">
+                            <h3>Task name</h3>
+                            <p style="color: grey;">Project Name | Assigned Team Lead</p>
+                        </div>
+                        <div class="review-item-rating">
+                            <p style="color: green;">Ongoing </p>
+                        </div>
+                    </div>
+                    <div class="single-review-st-text">
+                        <div class="idiv">
+                            <i class="bi bi-circle-fill i1" style="color:grey"></i>
+                        </div>
+                        <div class="review-ctn-hf">
+                            <h3>Task name</h3>
+                            <p style="color: grey;">Project Name | Assigned Team Lead</p>
+                        </div>
+                        <div class="review-item-rating">
+                            <p style="color: grey;">Completed </p>
+                        </div>
+                    </div>
+                    <div class="single-review-st-text">
+                        <div class="idiv">
+                            <i class="bi bi-circle-fill i1" style="color:red"></i>
+                        </div>
+                        <div class="review-ctn-hf">
+                            <h3>Task name</h3>
+                            <p style="color: grey;">Project Name | Assigned Team Lead</p>
+                        </div>
+                        <div class="review-item-rating">
+                            <p style="color: red;">Pending </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- Password meter End-->
+    
+<script>
+    function Addnewproject(){
+        window.location.href = `/Projects/Create`;
+    }
+
+    // Sample project data
+    const projects = [
+        {
+            name: "Project Alpha",
+            location: "India",
+            tasks: 1156,
+            startDate: "12/11/2024",
+            status: "Ongoing",
+            progress: 45,
+            imageUrl: "/asset/img/noun-add-user-428966 4.png"
+        },
+        {
+            name: "Project Beta",
+            location: "USA",
+            tasks: 980,
+            startDate: "01/01/2024",
+            status: "Ongoing",
+            progress: 60,
+            imageUrl: "/asset/img/noun-add-user-428966 4.png"
+        },
+        {
+            name: "Project Gamma",
+            location: "UK",
+            tasks: 750,
+            startDate: "15/03/2024",
+            status: "Completed",
+            progress: 100,
+            imageUrl: "/asset/img/noun-add-user-428966 4.png"
+        }
+    ];
+
+    // Container to hold the cards
+    const container = document.getElementById("project-container");
+
+    // Function to create project cards
+    projects.forEach(project => {
+        const card = document.createElement("div");
+        card.className = "col-lg-12 col-md-6 col-sm-6 col-xs-12";
+        card.style.padding = "10px 0px";
+
+        card.innerHTML = `
+            <div class="analytics-sparkle-line reso-mg-b-30" style="border-radius: 40px; height: 170px; background-color: #0068ff;">
+                <div class="analytics-content">
+                    <a href="Projects.html" style="text-decoration: none;">
+                        <div class="single-review-st-text">
+                            <div class="review-ctn-hf">
+                                <h4 style="color: white;">${project.name}</h4>
+                                <p style="color: white;">${project.location}</p>
+                            </div>
+                            <div class="review-item-rating" style="height: 55px; width: 55px; border-radius: 12px; background-color: white;">
+                                <div class="review-ctn-hf" style="margin-left: 0px;">
+                                    <h4 style="font-size: 20px; text-align: center;">${project.tasks}</h4>
+                                    <p style="font-size: 14px; margin-top: -6px; text-align: center;">Tasks</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="single-review-st-text">
+                            <div style="width: 80%; padding: 16px;">
+                                <h5 style="color: white;">Start Date : ${project.startDate}</h5>
+                                <h2 class="storage-right">
+                                    <span style="color: #e9e4e4; font-size: 14px;">${project.status}</span>
+                                </h2>
+                                <div class="progress progress-mini ug-1" style="background-color: #e9baff;">
+                                   <input type="range" id="progress" value="${project.progress}" max="100" min="0" step="1" />
+                                  
+                                </div>
+                            </div>
+                            <div style="width: 20%; display: flex; align-items: center; justify-content: flex-end;">
+                                <img src="${project.imageUrl}" style="border-radius: 0px; height: 30px; width: 30px;"/>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        `;
+
+        container.appendChild(card);
+    });
+
+</script>

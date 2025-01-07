@@ -1,0 +1,372 @@
+﻿@model IEnumerable<UserViewModel>
+@{
+    int totalOrders = ViewBag.TotalOrders; // Total number of records
+    int currentPage = ViewBag.CurrentPage; // Current page
+    int pageSize = ViewBag.PageSize; // Number of records per page
+    int totalPages = (int)Math.Ceiling((double)totalOrders / pageSize); // Total pages calculation
+    string serchquery = ViewBag.SearchTerm;
+}
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.min.css">
+<style>
+    .custom-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+        .custom-table th, .custom-table td {
+            text-align: center;
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+
+        .custom-table th {
+            background-color: #95a4fc;
+            color: #333;
+        }
+
+    .status-btn {
+        border: none;
+        border-radius: 4px;
+        padding: 5px 10px;
+        font-size: 0.875rem;
+        color: white;
+        background-color: #28a745;
+    }
+
+        .status-btn.active {
+            background-color: #28a745;
+        }
+
+    .action-btn {
+        border: none;
+        padding: 5px 10px;
+        border-radius: 4px;
+        color: white;
+        font-size: 0.875rem;
+        cursor: pointer;
+        margin-right: 5px;
+    }
+
+        .action-btn.edit {
+            background-color: #ffc107;
+        }
+
+        .action-btn.delete {
+            background-color: #dc3545;
+        }
+
+    .custom-pagination .page-item .page-link {
+        padding: 5px 10px;
+        border: 1px solid #ddd;
+        margin-left: 2px;
+    }
+
+    .custom-pagination .page-item.active .page-link {
+        background-color: #007bff;
+        color: white;
+    }
+
+    .custom-pagination .page-link {
+        color: #007bff;
+        text-decoration: none;
+    }
+
+        .custom-pagination .page-link:hover {
+            background-color: #f1f1f1;
+        }
+
+    .add-task-btn-nav {
+        padding: 10px 20px;
+        background-color: #95a4fc;
+        height: 32px;
+        border: none;
+        border-radius: 25px;
+        cursor: pointer;
+        /* width: 175px; */
+        margin-right: 20px;
+        margin-left: 12px;
+    }
+</style>
+<div>
+    <div class="row user-card" style="padding:18px;" >
+        <div class=" col-md-2 ">
+            <div class="analytics-sparkle-line reso-mg-b-30"
+                 style="background-color:#e3e7ff !important;    border-radius: 23px;     padding: 15px 19px !important;">
+                <div class="analytics-content">
+
+                    <h2 style="display: flex;justify-content: space-between;">
+                        <span>@ViewBag.ProjectManager</span>
+                        <img src="~/asset/img/person-circle 1.png" width="30" alt="">
+                    </h2>
+                    <br>
+                    <h2 style="font-size: 14px;">Project Manager</h2>
+
+                </div>
+
+            </div>
+
+        </div>
+        <div class=" col-md-2 ">
+            <div class="analytics-sparkle-line reso-mg-b-30"
+                 style="background-color: #e3e7ff !important;    border-radius: 23px; padding: 15px 19px !important;">
+                <div class="analytics-content">
+
+                    <h2 style="display: flex;justify-content: space-between;">
+                        <span class="text-white">@ViewBag.TeamLeader</span>
+                        <img src="~/asset/img/person-circle 1.png" width="30" alt="">
+                    </h2>
+                    <br>
+
+
+                    <h2 style="font-size: 14px;">Team Leader</h2>
+                </div>
+            </div>
+        </div>
+        <div class=" col-md-2 ">
+            <div class="analytics-sparkle-line reso-mg-b-30"
+                 style="background-color:#e3e7ff !important;    border-radius: 23px; padding: 15px 19px !important;">
+                <div class="analytics-content">
+
+                    <h2 style="display: flex;justify-content: space-between;">
+                        <span>@ViewBag.Engineer</span>
+                        <img src="~/asset/img/person-circle 1.png" width="30" alt="">
+                    </h2>
+                    <br>
+
+
+                    <h2 style="font-size: 14px;">Engineer</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12 col-md-6" style="padding: 0px 32px;">
+        <div class="dataTables_length">
+            <label style="font-weight: normal;text-align: left;white-space: nowrap;">
+                Show
+                <select id="rowQuantity" onchange="updateRowQuantity()" class="custom-select custom-select-sm form-control form-control-sm" style="width: 65px; padding: 0px 9px; display: inline-block; height: 32px;">
+                    @if (pageSize == 10)
+                    {
+                        <option value="10" selected>10</option>
+                    }
+                    else
+                    {
+                        <option value="10">10</option>
+                    }
+
+                    @if (pageSize == 25)
+                    {
+                        <option value="25" selected>25</option>
+                    }
+                    else
+                    {
+                        <option value="25">25</option>
+                    }
+
+                    @if (pageSize == 50)
+                    {
+                        <option value="50" selected>50</option>
+                    }
+                    else
+                    {
+                        <option value="50">50</option>
+                    }
+
+                    @if (pageSize == 100)
+                    {
+                        <option value="100" selected>100</option>
+                    }
+                    else
+                    {
+                        <option value="100">100</option>
+                    }
+
+                </select>entries
+            </label>
+        </div>
+    </div>
+    <div class="col-sm-12 col-md-6">
+        <div id="example_filter" class="dataTables_filter" style="text-align: right;">
+            <label>Search:<input type="search" id="searchQuery" value="@serchquery" oninput="searchfilterquery();" style="margin-left:.5em;display: inline-block;width: auto;height: 6px;" class="form-control form-control-sm" placeholder="" aria-controls="example"></label>
+            <a asp-action="Create" class="add-task-btn-nav" id="openModalBtn" style="color: #000000;">+ Add new User</a>
+            
+            @*<a asp-action="EditUser" class="btn btn-sm" style="margin-left:.5em;display: inline-block;width: auto;height: 6px;">Edit</a>*@
+        </div>
+    </div>
+
+</div>
+@if (!string.IsNullOrEmpty(serchquery))
+{
+    
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            var searchInput = $('#searchQuery');
+            searchInput.focus();
+
+            // Set the cursor at the end of the input field
+            var val = searchInput.val();
+            searchInput.val('').val(val); // Clears and sets the value back to move the cursor to the end
+        });
+    </script>
+}
+<div class="product-status mg-b-15">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="product-status-wrap drp-lst" style="padding: 9px 0px 0px 0px;">
+                    <div class="asset-inner">
+                        <table class="table table-bordered custom-table">
+                            <tr>
+                                <th>Sr.No</th>
+                                <th>Employee Name</th>                              
+                                <th>Email</th>
+                                <th>Role</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+
+                            @for (int i = 0; i < Model.Count(); i++)
+                            {
+                                var item = Model.ElementAt(i); // Gets the current item in the loop
+                                <tr>
+                                    <td>@(i + 1)</td> 
+                                    <td>@item.FullName</td>
+                                    <td>@item.Email</td> 
+                                    <td>@item.Role</td> 
+                                    @if (@item.staus == "Active")
+                                    {
+                                       <td style="color:green">@item.staus</td>
+                                    }
+                                    else
+                                    {
+                                      <td style="color:red">@item.staus</td>
+                                    }
+                                    <!-- Assuming `staus` is a property in your model -->
+                                    <td>
+                                        <a asp-action="EditUser" asp-route-id="@item.UserId" style="cursor:pointer;color: black;"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</a>
+
+                                        &nbsp;&nbsp;
+
+                                        <a asp-action="DeleteUser" asp-route-id="@item.UserId" style="cursor:pointer;color: red;"> <i class="fa fa-trash-o" aria-hidden="true"></i> Delete</a>
+                                      
+                                    </td>
+                                </tr>
+                            }
+                           
+                           
+                        </table>
+                    </div>
+                    <div class="custom-pagination">
+                        <div class="col-sm-12 col-md-5">
+                            @if (totalOrders > pageSize)
+                            {
+                                <div class="dataTables_info" id="example_info" role="status" aria-live="polite" style="padding-top: 1rem !important;">
+                                    Showing @pageSize of @totalOrders entries
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="dataTables_info" id="example_info" role="status" aria-live="polite" style="padding-top: 1rem !important;">
+                                    Showing @totalOrders of @totalOrders entries
+                                </div>
+                            }
+
+                        </div>
+                        <div class="col-sm-12 col-md-7">
+                            <div class="dataTables_paginate paging_simple_numbers" id="MainOrderTable_paginate" style="margin: 0;white-space: nowrap;text-align: right;">
+                                <ul class="pagination" style="margin: 2px 0;white-space: nowrap;justify-content: flex-end;">
+                                    <li class="paginate_button page-item previous @(currentPage == 1 ? "disabled" : "")">
+                                        <a href="@Url.Action("Index", new { pageNumber = currentPage - 1, searchTerm = ViewBag.SearchTerm,pageSize= pageSize })" class="page-link" @(currentPage == 1 ? "tabindex='-1'" : "")>Previous</a>
+                                    </li>
+
+                                    @if (totalPages > 5)
+                                    {
+                                        // Display the first page
+                                        if (currentPage > 3)
+                                        {
+                                            <li class="paginate_button page-item">
+                                                <a href="@Url.Action("Index", new { pageNumber = 1, searchTerm = ViewBag.SearchTerm,pageSize= pageSize })" class="page-link">1</a>
+                                            </li>
+                                            if (currentPage > 4)
+                                            {
+                                                <li class="paginate_button page-item disabled"><span class="page-link">...</span></li>
+                                            }
+                                        }
+
+                                        // Display current page and adjacent pages
+                                        for (int i = Math.Max(2, currentPage - 2); i <= Math.Min(totalPages - 1, currentPage + 2); i++)
+                                        {
+                                            if (i == currentPage)
+                                            {
+                                                <li class="paginate_button page-item active">
+                                                    <a href="#" class="page-link" aria-current="page">@i</a>
+                                                </li>
+                                            }
+                                            else
+                                            {
+                                                <li class="paginate_button page-item">
+                                                    <a href="@Url.Action("Index", new { pageNumber = i, searchTerm = ViewBag.SearchTerm,pageSize= pageSize })" class="page-link">@i</a>
+                                                </li>
+                                            }
+                                        }
+
+                                        // Display the last page
+                                        if (currentPage < totalPages - 2)
+                                        {
+                                            if (currentPage < totalPages - 3)
+                                            {
+                                                <li class="paginate_button page-item disabled"><span class="page-link">...</span></li>
+                                            }
+                                            <li class="paginate_button page-item">
+                                                <a href="@Url.Action("Index", new { pageNumber = totalPages, searchTerm = ViewBag.SearchTerm,pageSize= pageSize })" class="page-link">@totalPages</a>
+                                            </li>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        // Display all page buttons if total pages are 5 or fewer
+                                        for (int i = 1; i <= totalPages; i++)
+                                        {
+                                            if (i == currentPage)
+                                            {
+                                                <li class="paginate_button page-item active">
+                                                    <a href="#" class="page-link" aria-current="page">@i</a>
+                                                </li>
+                                            }
+                                            else
+                                            {
+                                                <li class="paginate_button page-item">
+                                                    <a href="@Url.Action("Index", new { pageNumber = i, searchTerm = ViewBag.SearchTerm,pageSize= pageSize })" class="page-link">@i</a>
+                                                </li>
+                                            }
+                                        }
+                                    }
+
+                                    <li class="paginate_button page-item next @(currentPage == totalPages ? "disabled" : "")">
+                                        <a href="@Url.Action("Index", new { pageNumber = currentPage + 1, searchTerm = ViewBag.SearchTerm,pageSize= pageSize })" class="page-link" @(currentPage == totalPages ? "tabindex='-1'" : "")>Next</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function searchfilterquery() {
+        var searchQuery = document.getElementById('searchQuery').value;
+        var pageSize = document.getElementById('rowQuantity').value;
+        window.location.href = `/Users/Index?searchTerm=${searchQuery}&pageNumber=1&pageSize=${pageSize}`;
+    }
+
+    function updateRowQuantity() {
+        var pageSize = document.getElementById('rowQuantity').value;
+        var searchQuery = document.getElementById('searchQuery').value;
+        window.location.href = `/Users/Index?searchTerm=${searchQuery}&pageNumber=1&pageSize=${pageSize}`;
+    }
+</script>
